@@ -5,7 +5,6 @@ import path from 'path'
 export default defineConfig({
   plugins: [react()],
   
-  // Path resolution (no src/)
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './'),
@@ -24,11 +23,14 @@ export default defineConfig({
       'three',
       'three/examples/jsm/controls/OrbitControls',
       'three/examples/jsm/loaders/GLTFLoader',
+      'three/examples/jsm/loaders/KTX2Loader',
+      'three/examples/jsm/libs/meshopt_decoder.module',
       'three/examples/jsm/objects/Water',
       'three/examples/jsm/objects/Sky',
       'three/examples/jsm/libs/stats.module',
       'three/examples/jsm/libs/lil-gui.module.min'
-    ]
+    ],
+    exclude: []
   },
 
   // Asset handling
@@ -48,14 +50,18 @@ export default defineConfig({
         target: 'http://localhost:3001',
         changeOrigin: true
       },
-      '/audio': {
+      '/audios': {
         target: 'http://localhost:3001',
         changeOrigin: true
       },
-      '/models': {
-        target: 'http://localhost:3001',
+      '/audio': {
+        target: 'http://localhost:3001', 
         changeOrigin: true
       }
+      // '/audio': {
+      //   target: 'http://localhost:3001',
+      //   changeOrigin: true
+      // }
     }
   },
 
@@ -69,7 +75,9 @@ export default defineConfig({
           'three': ['three'],
           'three-addons': [
             'three/examples/jsm/controls/OrbitControls',
-            'three/examples/jsm/loaders/GLTFLoader'
+            'three/examples/jsm/loaders/GLTFLoader',
+            'three/examples/jsm/objects/Water',
+            'three/examples/jsm/objects/Sky',
           ]
         }
       }

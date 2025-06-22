@@ -1,42 +1,190 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: black;
+  box-sizing: border-box;
+}
+
+/* Ocean Background Container */
+.ocean-background-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  background: black;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Canvas Wrapper */
+.ocean-canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block !important;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* UI Overlay Container */
+.ui-overlay {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  pointer-events: auto;
+}
+
+/* Stats Display */
+.stats-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 999;
+}
+
+/* GUI Container */
+.gui-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 998;
+}
+
+/* Loading State */
+.ocean-loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 18px;
+  z-index: 1001;
+}
+
+/* Error State */
+.ocean-error {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: red;
   text-align: center;
+  z-index: 1001;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+/* Responsive Design */
+@media (max-width: 768px) {
+  .ui-overlay {
+    top: 10px;
+    right: 10px;
   }
-  to {
-    transform: rotate(360deg);
+  
+  .ocean-background-container {
+    font-size: 14px;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+/* Performance optimizations */
+.ocean-canvas {
+  will-change: transform;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Custom GUI styling (override lil-gui defaults) */
+.dg.ac {
+  z-index: 999 !important;
+}
+
+/* ===============================
+   SUBTITLE ANIMATIONS
+   =============================== */
+
+@keyframes fadeInUp {
+  0% { 
+    opacity: 0; 
+    transform: translateX(-50%) translateY(20px); 
+  }
+  100% { 
+    opacity: 1; 
+    transform: translateX(-50%) translateY(0); 
   }
 }
 
-.card {
-  padding: 2em;
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
 }
 
-.read-the-docs {
-  color: #888;
+@keyframes fadeOutDown {
+  0% { 
+    opacity: 1; 
+    transform: translateX(-50%) translateY(0); 
+  }
+  100% { 
+    opacity: 0; 
+    transform: translateX(-50%) translateY(20px); 
+  }
+}
+
+/* ===============================
+   CHARACTER DEATH ANIMATIONS
+   =============================== */
+
+@keyframes characterShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-2px); }
+  75% { transform: translateX(2px); }
+}
+
+@keyframes characterFade {
+  0% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0.3; transform: scale(0.8); }
+}
+
+@keyframes ghostFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+/* ===============================
+   HEALTH BAR ANIMATIONS
+   =============================== */
+
+@keyframes healthPulse {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(1.1); }
+}
+
+@keyframes healthCritical {
+  0%, 100% { box-shadow: 0 0 5px rgba(255, 0, 0, 0.5); }
+  50% { box-shadow: 0 0 20px rgba(255, 0, 0, 1); }
+}
+
+/* ===============================
+   UTILITY ANIMATIONS
+   =============================== */
+
+.shake {
+  animation: characterShake 0.5s infinite;
+}
+
+.fade-ghost {
+  animation: characterFade 2s ease-out forwards;
+}
+
+.floating {
+  animation: ghostFloat 3s ease-in-out infinite;
+}
+
+.health-pulse {
+  animation: healthPulse 0.5s ease-in-out infinite;
+}
+
+.health-critical {
+  animation: healthCritical 1s ease-in-out infinite;
 }
