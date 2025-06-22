@@ -22,7 +22,6 @@ function App() {
   const [currentSessionId, setCurrentSessionId] = useState<string>('demo-session-123');
   const [autoTrigger, setAutoTrigger] = useState(false);
 
-  // Session'a katıl (component mount'ta)
   useEffect(() => {
     if (isConnected && currentSessionId) {
       joinSession(currentSessionId);
@@ -60,106 +59,11 @@ function App() {
       {/* Subtitle Overlay */}
       <Subtitle characterData={characterData} />
 
-      {/* Debug UI */}
-      <div style={{
-        position: 'absolute',
-        top: 10,
-        left: 10,
-        zIndex: 1000,
-        background: 'rgba(0,0,0,0.8)',
-        color: 'white',
-        padding: '10px',
-        borderRadius: '5px',
-        fontFamily: 'monospace',
-        fontSize: '12px'
-      }}>
-        <div>🔗 WebSocket: {isConnected ? '✅ Connected' : '❌ Disconnected'}</div>
-        <div>📡 Session: {currentSessionId}</div>
-        {error && <div style={{color: 'red'}}>❌ Error: {error}</div>}
-        
-        <div style={{ marginTop: '10px' }}>
-          <button 
-            onClick={() => setAutoTrigger(!autoTrigger)}
-            style={{ 
-              background: autoTrigger ? '#ff4444' : '#44ff44',
-              color: 'white',
-              border: 'none',
-              padding: '5px 10px',
-              borderRadius: '3px',
-              cursor: 'pointer',
-              marginRight: '5px'
-            }}
-          >
-            {autoTrigger ? '⏹️ Stop Auto' : '▶️ Start Auto'}
-          </button>
-          
-          <button 
-            onClick={() => requestResponse(currentSessionId, 'claude')}
-            style={{ 
-              background: '#4444ff',
-              color: 'white',
-              border: 'none',
-              padding: '5px 10px',
-              borderRadius: '3px',
-              cursor: 'pointer',
-              marginRight: '5px'
-            }}
-          >
-            🎯 Claude Speak
-          </button>
-          
-          <button 
-            onClick={() => requestResponse(currentSessionId)}
-            style={{ 
-              background: '#ff8844',
-              color: 'white',
-              border: 'none',
-              padding: '5px 10px',
-              borderRadius: '3px',
-              cursor: 'pointer'
-            }}
-          >
-            🎲 Random Speak
-          </button>
-        </div>
-
-        {/* Character Status */}
-        <div style={{ marginTop: '10px', fontSize: '10px' }}>
-          {Object.entries(characterData).map(([id, data]) => (
-            <div key={id} style={{ 
-              color: data.isPlaying ? '#44ff44' : '#888',
-              display: 'flex',
-              justifyContent: 'space-between',
-              width: '200px'
-            }}>
-              <span>{id.toUpperCase()}</span>
-              <span>{data.isPlaying ? '🎵 Playing' : '💤 Idle'}</span>
-              <span>{data.facialExpression}</span>
-            </div>
-          ))}
-          
-          {/* BabyCharacter Status */}
-          <div style={{ 
-            marginTop: '8px', 
-            padding: '4px',
-            background: 'rgba(255,255,255,0.1)',
-            borderRadius: '3px'
-          }}>
-            <div style={{ color: '#ffd700', fontSize: '11px' }}>
-              👶 BabyCharacter: {Object.values(characterData).some(char => char.isPlaying) ? '🌟 REACTIVE' : '😴 IDLE'}
-            </div>
-            <div style={{ color: '#aaa', fontSize: '9px' }}>
-              Current Speaker: {Object.entries(characterData).find(([id, data]) => data.isPlaying)?.[0] || 'none'}
-            </div>
-          </div>
-        </div>
-      </div>
-
       <OceanBackground>       
         {/* Grok Character */}
         <group position={[-15, 15, 0]} scale={[3, 3, 3]} rotation={[0, 0.15, -0.05]}>
           <MainCharacter 
-          facialExpression={characterData.grok?.facialExpression || "mischievous"}
+          facialExpression={characterData.grok?.facialExpression}
             enableIdleAnimations={!characterData.grok?.isPlaying}
             lipSyncData={characterData.grok?.lipSyncData || (characterData.grok?.isPlaying ? fallbackLipSyncData : undefined)}
             audioUrl={characterData.grok?.audioUrl}
@@ -186,7 +90,7 @@ function App() {
         {/* GPT Character */}
         <group position={[0, 15, 0]} scale={[3, 3, 3]} rotation={[0, 0, 0]}>
           <MainCharacter 
-            facialExpression={characterData.gpt?.facialExpression || "happy"}
+            facialExpression={characterData.gpt?.facialExpression}
             enableIdleAnimations={!characterData.gpt?.isPlaying}
             lipSyncData={characterData.gpt?.lipSyncData || (characterData.gpt?.isPlaying ? fallbackLipSyncData : undefined)}
             audioUrl={characterData.gpt?.audioUrl}
@@ -213,7 +117,7 @@ function App() {
         {/* Claude Character */}
         <group position={[15, 15, 0]} scale={[3, 3, 3]} rotation={[0, -0.15, 0.05]}>
           <MainCharacter         
-            facialExpression={characterData.claude?.facialExpression || "thinking"}
+            facialExpression={characterData.claude?.facialExpression}
             enableIdleAnimations={!characterData.claude?.isPlaying}
             lipSyncData={characterData.claude?.lipSyncData || (characterData.claude?.isPlaying ? fallbackLipSyncData : undefined)}
             audioUrl={characterData.claude?.audioUrl}

@@ -5,6 +5,7 @@ import { OrbitControls, useTexture } from '@react-three/drei';
 import { Water } from 'three/examples/jsm/objects/Water.js';
 import { Sky } from 'three/examples/jsm/objects/Sky.js';
 import Stats from 'three/examples/jsm/libs/stats.module.js';
+
 // Extend Three.js objects for R3F
 extend({ Water, Sky });
 
@@ -91,7 +92,6 @@ interface OceanBackgroundProps {
 }
 
 export default function OceanBackground({ children }: OceanBackgroundProps) {
-
   const [waterUniforms] = useState({
     distortionScale: { value: 3.7 },
     size: { value: 1.0 }
@@ -99,11 +99,59 @@ export default function OceanBackground({ children }: OceanBackgroundProps) {
 
   const statsRef = useRef<Stats | null>(null);
 
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      const userAgent = navigator.userAgent || navigator.vendor;
+      const isMobileUA = /android|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent.toLowerCase());
+      const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+      const isSmallScreen = window.innerWidth <= 768;
+      
+      setIsMobile(isMobileUA || (isTouchDevice && isSmallScreen));
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const cameraSettings = {
+    // Mobile: Wide shot, limited controls
+    mobile: {
+      fov: 20,
+      position: [0, 40, 250] as [number, number, number],
+      minDistance: 180.0,
+      maxDistance: 280.0,
+      enableZoom: false,        // Disable zoom on mobile
+      enableRotate: false,      // Disable rotation on mobile
+      dampingFactor: 0.08
+    },
+    // Desktop: Full controls
+    desktop: {
+      fov: 15,
+      position: [0, 30, 200] as [number, number, number],
+      minDistance: 50.0,
+      maxDistance: 300.0,
+      enableZoom: true,
+      enableRotate: true,
+      dampingFactor: 0.05
+    }
+  };
+
+  const currentSettings = isMobile ? cameraSettings.mobile : cameraSettings.desktop;
+
   return (
     <div className="ocean-background-container">
       <Canvas
         className="ocean-canvas"
-        camera={{ fov: 40, position: [0, 30, 200], near: 1, far: 1000 }}
+        camera={{ 
+          fov: currentSettings.fov, 
+          position: currentSettings.position, 
+          near: 1, 
+          far: 1000 
+        }}
         shadows
         gl={{
           toneMapping: THREE.ACESFilmicToneMapping,
@@ -116,14 +164,22 @@ export default function OceanBackground({ children }: OceanBackgroundProps) {
         <pointLight position={[10, 10, 10]} intensity={1} />
 
         <OrbitControls
-          maxPolarAngle={Math.PI * 0.495}
-          target={new THREE.Vector3(0, 0, 0)}
-          minDistance={10.0}
-          maxDistance={1000.0}
+          enableRotate={currentSettings.enableRotate}
+          minPolarAngle={Math.PI * 0.1}
+          maxPolarAngle={Math.PI * 0.45}          
+          minAzimuthAngle={0} 
+          maxAzimuthAngle={0} 
+          enableZoom={currentSettings.enableZoom}
+          minDistance={currentSettings.minDistance}
+          maxDistance={currentSettings.maxDistance}
+          enablePan={false}
+          enableDamping={true}
+          dampingFactor={currentSettings.dampingFactor}
+          target={new THREE.Vector3(0, 8, 0)}
         />
 
         <Ocean
-          skyParameters={{  elevation: 2, azimuth: 180 }}
+          skyParameters={{ elevation: 2, azimuth: 180 }}
           waterUniforms={waterUniforms}
           statsRef={statsRef}
         />
