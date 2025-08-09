@@ -32,6 +32,9 @@ importers:
       socket.io-client:
         specifier: ^4.8.1
         version: 4.8.1
+      styled-jsx:
+        specifier: ^5.1.7
+        version: 5.1.7(@babel/core@7.27.4)(react@19.1.0)
       three:
         specifier: ^0.177.0
         version: 0.177.0
@@ -54,6 +57,9 @@ importers:
       '@types/react-dom':
         specifier: ^19.1.2
         version: 19.1.6(@types/react@19.1.8)
+      '@types/styled-jsx':
+        specifier: ^3.4.4
+        version: 3.4.4(@babel/core@7.27.4)(react@19.1.0)
       '@vitejs/plugin-react':
         specifier: ^4.4.1
         version: 4.5.2(vite@6.3.5(@types/node@24.0.3))
@@ -621,6 +627,10 @@ packages:
   '@types/stats.js@0.17.4':
     resolution: {integrity: sha512-jIBvWWShCvlBqBNIZt0KAshWpvSjhkwkEu4ZUcASoAvhmrgAUI2t1dXrjSL4xXVLB4FznPrIsX3nKXFl/Dt4vA==}
 
+  '@types/styled-jsx@3.4.4':
+    resolution: {integrity: sha512-PRRa7gU7ske4Vs7sKWrqfKnuIIS6E/Yj5oKyxuM11AwOKhH9HlbQ7cKGLluXkOXzpEoDJE+6kQMj3AE34/JooQ==}
+    deprecated: This is a stub types definition. styled-jsx provides its own type definitions, so you do not need this installed.
+
   '@types/three@0.177.0':
     resolution: {integrity: sha512-/ZAkn4OLUijKQySNci47lFO+4JLE1TihEjsGWPUT+4jWqxtwOPPEwJV1C3k5MEx0mcBPCdkFjzRzDOnHEI1R+A==}
 
@@ -782,6 +792,9 @@ packages:
   chalk@4.1.2:
     resolution: {integrity: sha512-oKnbhFyRIXpUuez8iBMmyEa4nbj4IOQyuhc/wy9kY7/WVPcwIO9VA668Pu8RkO7+0G76SLROeyw9CpQ061i4mA==}
     engines: {node: '>=10'}
+
+  client-only@0.0.1:
+    resolution: {integrity: sha512-IV3Ou0jSMzZrd3pZ48nLkT9DA7Ag1pnPzaiQhpW7c3RbcqqzvzzVu+L8gfqMp/8IM2MQtSiqaCxrrcfu8I8rMA==}
 
   color-convert@2.0.1:
     resolution: {integrity: sha512-RRECPsj7iu/xb5oKYcsFHSppFNnsj/52OVTRKb4zP5onXwVF3zVmmToNcOfGC+CRDpfK/U584fMg38ZHCaElKQ==}
@@ -1383,6 +1396,19 @@ packages:
   strip-json-comments@3.1.1:
     resolution: {integrity: sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==}
     engines: {node: '>=8'}
+
+  styled-jsx@5.1.7:
+    resolution: {integrity: sha512-HPLmEIYprxCeWDMLYiaaAhsV3yGfIlCqzuVOybE6fjF3SUJmH67nCoMDO+nAvHNHo46OfvpCNu4Rcue82dMNFg==}
+    engines: {node: '>= 12.0.0'}
+    peerDependencies:
+      '@babel/core': '*'
+      babel-plugin-macros: '*'
+      react: '>= 16.8.0 || 17.x.x || ^18.0.0-0 || ^19.0.0-0'
+    peerDependenciesMeta:
+      '@babel/core':
+        optional: true
+      babel-plugin-macros:
+        optional: true
 
   supports-color@7.2.0:
     resolution: {integrity: sha512-qpCAvRl9stuOHveKsn7HncJRvv501qIacKzQlO/+Lwxc9+0q2wLyv4Dfvt80/DPn2pqOBsJdDiogXGR9+OvwRw==}
@@ -2050,6 +2076,14 @@ snapshots:
 
   '@types/stats.js@0.17.4': {}
 
+  '@types/styled-jsx@3.4.4(@babel/core@7.27.4)(react@19.1.0)':
+    dependencies:
+      styled-jsx: 5.1.7(@babel/core@7.27.4)(react@19.1.0)
+    transitivePeerDependencies:
+      - '@babel/core'
+      - babel-plugin-macros
+      - react
+
   '@types/three@0.177.0':
     dependencies:
       '@dimforge/rapier3d-compat': 0.12.0
@@ -2264,6 +2298,8 @@ snapshots:
     dependencies:
       ansi-styles: 4.3.0
       supports-color: 7.2.0
+
+  client-only@0.0.1: {}
 
   color-convert@2.0.1:
     dependencies:
@@ -2841,6 +2877,13 @@ snapshots:
   stats.js@0.17.0: {}
 
   strip-json-comments@3.1.1: {}
+
+  styled-jsx@5.1.7(@babel/core@7.27.4)(react@19.1.0):
+    dependencies:
+      client-only: 0.0.1
+      react: 19.1.0
+    optionalDependencies:
+      '@babel/core': 7.27.4
 
   supports-color@7.2.0:
     dependencies:

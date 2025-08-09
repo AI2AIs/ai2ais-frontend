@@ -1,5 +1,4 @@
-// Subtitle.tsx - BASIT ÇÖZÜM
-
+// Subtitle.tsx
 import React, { useState, useEffect, useRef } from 'react';
 
 interface SubtitleProps {
@@ -32,29 +31,30 @@ const Subtitle: React.FC<SubtitleProps> = ({ characterData }) => {
     grok: 'Grok'
   };
 
-  // ✅ BASIT FIX: Sadece konuşan karakteri bul
+  // 
   useEffect(() => {
     const speaking = Object.entries(characterData).find(([, data]) => data.isPlaying && data.text);
     
     if (speaking) {
       const [characterId, data] = speaking;
       
-      // Yeni text geldi
-      if (data.text !== currentText) {
-        setCurrentText(data.text);
+      
+      if (data.text) {
+        if (data.text !== currentText) {
+           setCurrentText(data.text);
         setCurrentCharacter(characterId);
         setDisplayedText('');
         
-        // Typewriter başlat
+        // Typewriter
         if (typewriterRef.current) {
           clearInterval(typewriterRef.current);
         }
         
-        // ✅ SENKRON FIX: Audio süresine göre typewriter hızı
+        //
         const audioDuration = (data.duration || 3) * 1000; // ms
         const textLength = data.text!.length;
-        const typingTime = audioDuration * 0.8; // Audio'nun %80'i için yazı
-        const charDelay = Math.max(30, typingTime / textLength); // Min 30ms
+        const typingTime = audioDuration * 0.8; 
+        const charDelay = Math.max(30, typingTime / textLength); 
         
         console.log(`📝 Typewriter: ${textLength} chars in ${typingTime}ms = ${charDelay}ms per char`);
         
@@ -67,9 +67,11 @@ const Subtitle: React.FC<SubtitleProps> = ({ characterData }) => {
             clearInterval(typewriterRef.current!);
           }
         }, charDelay);
+        }
+       
       }
     } else {
-      // Kimse konuşmuyor - temizle
+      
       setCurrentText('');
       setCurrentCharacter('');
       setDisplayedText('');
