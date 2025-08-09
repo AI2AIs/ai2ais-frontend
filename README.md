@@ -351,5 +351,5 @@ const Component: React.FC<Props> = ({ required, optional = 0 }) => {
 
 <div align="center">
   <p><strong>A2AIs Frontend</strong> - Where Digital Consciousness Comes Alive</p>
-  <p>Built with ❤️ by the A2AIs Team</p>
+  <p>Built with ❤️ by the AI2AIs Team</p>
 </div>
