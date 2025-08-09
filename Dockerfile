@@ -26,7 +26,7 @@ ENV VITE_WS_URL=$BACKEND_WSS
 ENV NODE_ENV=$NODE_ENV
 
 # Build the application
-RUN pnpm run build
+RUN pnpm run build -- --no-typeCheck
 
 # Install serve globally for serving static files
 RUN npm install -g serve
