@@ -19,8 +19,10 @@ function App() {
   
   // Session management
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [currentSessionId, setCurrentSessionId] = useState<string>('demo-session-123');
+  const [currentSessionId, setCurrentSessionId] = useState<string>('main-session');
   const [autoTrigger, setAutoTrigger] = useState(false);
+
+  
 
   useEffect(() => {
     if (isConnected && currentSessionId) {
@@ -133,7 +135,7 @@ function App() {
           </mesh>
           
           <HealthBar 
-            currentHealth={10}
+            currentHealth={100}
             maxHealth={100}
             position={[0, -2, 0]}
             width={2}     
@@ -151,7 +153,7 @@ function App() {
               audioVolume: 0.5
             }}
           />
-        </mesh>
+        </mesh>       
       </OceanBackground>
     </>
   );

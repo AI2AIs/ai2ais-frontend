@@ -321,8 +321,8 @@ export function MainCharacter({
     console.log("Starting lip sync animation...");
     setIsSpeaking(true);
 
-    audioRef.current = new Audio(audioUrl);
-    audioRef.current.play();
+    //audioRef.current = new Audio(audioUrl);
+    //audioRef.current.play();
 
     const startTime = Date.now();
 
@@ -435,14 +435,28 @@ export function MainCharacter({
       console.log(`Speaking state changed: ${isSpeaking ? 'started' : 'stopped'}`);
       
       stopIdleAnimations();
-      
-      setTimeout(() => {
-        if (faceMesh && enableIdleAnimations) {
-          startIdleAnimations();
-        }
-      }, 100);
+      startIdleAnimations();
+      // setTimeout(() => {
+      //   if (faceMesh && enableIdleAnimations) {
+      //     startIdleAnimations();
+      //   }
+      // }, 100);
     }
-  }, [isSpeaking, faceMesh, enableIdleAnimations]);
+  }, [isSpeaking, faceMesh]);
+
+
+  useEffect(() => {
+  if (!isSpeaking && !isLaughing && faceMesh) {
+    console.log("🎭 Speech ended, resetting facial expression");
+    
+    setTimeout(() => {
+      if (!isSpeaking && !isLaughing) {
+        resetExpressionMorphs();
+        console.log("🎭 Reset to neutral completed");
+      }
+    }, 1000); 
+  }
+}, [isSpeaking, isLaughing, faceMesh]);
 
   // Apply facial expression when it changes
   useEffect(() => {

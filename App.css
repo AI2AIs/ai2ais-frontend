@@ -188,3 +188,211 @@ html, body {
 .health-critical {
   animation: healthCritical 1s ease-in-out infinite;
 }
+
+
+
+
+/* Session Dashboard Animations */
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(0.95);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(0, 255, 136, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.6);
+  }
+}
+
+/* Session Dashboard Styles */
+.session-dashboard {
+  animation: fadeInLeft 0.5s ease-out;
+}
+
+.session-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: fadeInDown 0.3s ease-out;
+}
+
+.session-card:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.session-card.active {
+  animation: glow 2s infinite;
+}
+
+/* Status Bar Styles */
+.status-bar {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* Notification Styles */
+.notification-badge {
+  animation: pulse 2s infinite;
+}
+
+.notification-dropdown {
+  animation: fadeInDown 0.2s ease-out;
+}
+
+/* Live Indicator */
+.live-indicator {
+  animation: pulse 2s infinite;
+  background: linear-gradient(45deg, #ff0044, #ff4477);
+}
+
+/* Energy Bar Animations */
+.energy-bar {
+  transition: width 0.5s ease-out;
+}
+
+.energy-bar.critical {
+  animation: pulse 1s infinite;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .session-dashboard {
+    position: fixed !important;
+    top: 50px !important;
+    left: 10px !important;
+    right: 10px !important;
+    width: auto !important;
+    max-height: 60vh !important;
+  }
+  
+  .status-bar {
+    padding: 6px 12px !important;
+  }
+  
+  .session-card {
+    margin: 6px 0 !important;
+    padding: 12px !important;
+  }
+}
+
+/* Scrollbar Styling */
+.session-dashboard::-webkit-scrollbar {
+  width: 6px;
+}
+
+.session-dashboard::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 3px;
+}
+
+.session-dashboard::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+.session-dashboard::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Loading States */
+.loading-spinner {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-top: 2px solid #00ff88;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Error States */
+.error-message {
+  background: rgba(255, 68, 68, 0.1);
+  border: 1px solid rgba(255, 68, 68, 0.3);
+  border-radius: 8px;
+  padding: 12px;
+  color: #ff4444;
+  font-size: 11px;
+}
+
+/* Success States */
+.success-message {
+  background: rgba(0, 255, 136, 0.1);
+  border: 1px solid rgba(0, 255, 136, 0.3);
+  border-radius: 8px;
+  padding: 12px;
+  color: #00ff88;
+  font-size: 11px;
+}
+
+/* Button Hover Effects */
+button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Gradient Text Effects */
+.gradient-text {
+  background: linear-gradient(45deg, #00ff88, #00d2ff);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Glass Morphism Effects */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+}
+
+/* Character-specific Colors */
+.claude-accent { color: #FF6B35; }
+.gpt-accent { color: #00D2FF; }
+.grok-accent { color: #FFD700; }
+
+.claude-bg { background: rgba(255, 107, 53, 0.1); }
+.gpt-bg { background: rgba(0, 210, 255, 0.1); }
+.grok-bg { background: rgba(255, 215, 0, 0.1); }
