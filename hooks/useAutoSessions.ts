@@ -26,7 +26,7 @@ export const useAutoSessions = (): UseAutoSessionsReturn => {
   const isInitializedRef = useRef(false);
 
   // API Base URL
-  const API_BASE = 'http://localhost:3002';
+  const API_BASE = import.meta.env.VITE_BACKEND_API || 'http://localhost:3002';
 
   // Fetch active sessions from backend
   const fetchActiveSessions = useCallback(async (): Promise<AutoSession[]> => {

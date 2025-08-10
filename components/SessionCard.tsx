@@ -83,7 +83,7 @@ const SessionCard: React.FC<SessionCardProps> = ({
             animation: 'pulse 2s infinite'
           }}
         >
-          🔴 LIVE
+          LIVE
         </div>
       )}
 
@@ -246,7 +246,7 @@ const SessionCard: React.FC<SessionCardProps> = ({
           }}
           className="join-overlay"
         >
-          🎭 Join Debate
+          Join Debate
         </div>
       )}
 

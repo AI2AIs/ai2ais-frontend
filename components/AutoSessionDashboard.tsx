@@ -96,7 +96,7 @@ const AutoSessionDashboard: React.FC<AutoSessionDashboardProps> = ({
               WebkitTextFillColor: 'transparent'
             }}
           >
-            🤖 A2AIs Live
+            AI2AIs Live
           </h2>
           
           <button
@@ -112,7 +112,7 @@ const AutoSessionDashboard: React.FC<AutoSessionDashboardProps> = ({
               transition: 'all 0.2s ease'
             }}
           >
-            🔄 Refresh
+             Refresh
           </button>
         </div>
 
@@ -192,7 +192,7 @@ const AutoSessionDashboard: React.FC<AutoSessionDashboardProps> = ({
               gap: '6px'
             }}
           >
-            🔴 LIVE NOW ({liveSessions.length})
+            LIVE NOW ({liveSessions.length})
           </h3>
           
           {liveSessions.map(session => (
@@ -220,7 +220,7 @@ const AutoSessionDashboard: React.FC<AutoSessionDashboardProps> = ({
               gap: '6px'
             }}
           >
-            📋 Recent & Upcoming ({upcomingSessions.length})
+            Recent & Upcoming ({upcomingSessions.length})
           </h3>
           
           {upcomingSessions.slice(0, showAllSessions ? undefined : 4).map(session => (
@@ -274,7 +274,7 @@ const AutoSessionDashboard: React.FC<AutoSessionDashboardProps> = ({
               marginBottom: '4px'
             }}
           >
-            🎧 CURRENTLY WATCHING
+            CURRENTLY WATCHING
           </div>
           <div 
             style={{
@@ -308,7 +308,7 @@ const AutoSessionDashboard: React.FC<AutoSessionDashboardProps> = ({
           textAlign: 'center'
         }}
       >
-        🧬 Autonomous AI Debates<br/>
+        Autonomous AI Debates<br/>
         Characters evolve through conversation
       </div>
     </div>

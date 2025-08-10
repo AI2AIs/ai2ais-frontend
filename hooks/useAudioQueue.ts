@@ -70,7 +70,7 @@ export const useAudioQueue = (): UseAudioQueueReturn => {
       return;
     }
 
-    console.log('🎵 Audio Queue: Playing next item');
+    console.log('Audio Queue: Playing next item');
     
     const nextItem = queue[0];
     setQueue(prev => prev.slice(1)); // Remove first item
@@ -156,7 +156,7 @@ export const useAudioQueue = (): UseAudioQueueReturn => {
 
   // Clear queue
   const clearQueue = useCallback(() => {
-    console.log('🧹 Audio Queue: Clearing queue');
+    console.log('Audio Queue: Clearing queue');
     
     // Stop current audio
     if (activeAudio) {
@@ -180,7 +180,7 @@ export const useAudioQueue = (): UseAudioQueueReturn => {
   const skipCurrent = useCallback(() => {
     if (!activeAudio) return;
     
-    console.log(`⏭️ Audio Queue: Skipping ${activeAudio.item.characterId}`);
+    console.log(`Audio Queue: Skipping ${activeAudio.item.characterId}`);
     
     // Stop current audio
     activeAudio.audioElement.pause();
@@ -205,7 +205,7 @@ export const useAudioQueue = (): UseAudioQueueReturn => {
   // Auto-play when queue has items and nothing is playing
   useEffect(() => {
     if (queue.length > 0 && !activeAudio) {
-      console.log('🚀 Audio Queue: Auto-playing next item');
+      console.log('Audio Queue: Auto-playing next item');
       playNextItem();
     }
   }, [queue.length, activeAudio, playNextItem]);

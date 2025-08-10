@@ -60,7 +60,7 @@ export const useWebSocket = (wsUrl: string = import.meta.env.VITE_BACKEND_WSS!):
       wsRef.current = new WebSocket(wsUrl);
 
       wsRef.current.onopen = () => {
-        console.log('🔗 WebSocket connected');
+        console.log('WebSocket connected');
         setIsConnected(true);
         setError(null);
       };
@@ -75,7 +75,7 @@ export const useWebSocket = (wsUrl: string = import.meta.env.VITE_BACKEND_WSS!):
       };
 
       wsRef.current.onclose = () => {
-        console.log('🔌 WebSocket disconnected');
+        console.log('WebSocket disconnected');
         setIsConnected(false);
         
         reconnectTimeoutRef.current = setTimeout(() => {
@@ -170,7 +170,7 @@ const handleWebSocketMessage = useCallback((message: WebSocketMessage) => {
         data: { sessionId },
         timestamp: Date.now()
       }));
-      console.log('🚀 Joined session:', sessionId);
+      console.log('Joined session:', sessionId);
     }
   }, []);
 
